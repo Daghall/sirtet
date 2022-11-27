@@ -49,7 +49,7 @@ Feature("controls", () => {
     });
 
     Then("square should be near the bottom", () => {
-      expect(board.current.toString()).to.deep.equal("1:37,1:38,2:37,2:38");
+      expect(board.current.toString()).to.deep.equal("1:17,1:18,2:17,2:18");
     });
 
     When("moving square down", () => {
@@ -57,7 +57,7 @@ Feature("controls", () => {
     });
 
     Then("square should be moved", () => {
-      expect(board.current.toString()).to.deep.equal("1:38,1:39,2:38,2:39");
+      expect(board.current.toString()).to.deep.equal("1:18,1:19,2:18,2:19");
     });
 
     When("trying to move beyond bottom", () => {
@@ -65,7 +65,7 @@ Feature("controls", () => {
     });
 
     Then("square should be at the same place", () => {
-      expect(board.current.toString()).to.deep.equal("1:38,1:39,2:38,2:39");
+      expect(board.current.toString()).to.deep.equal("1:18,1:19,2:18,2:19");
     });
   });
 });
