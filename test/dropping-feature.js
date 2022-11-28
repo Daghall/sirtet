@@ -2,7 +2,6 @@ import pythia from "the-pythia";
 
 import Board from "../lib/board.js";
 import Controls from "../lib/controls.js";
-import Shape from "../lib/shape.js";
 
 Feature("Dropping", () => {
   Scenario("dropping shapes", () => {
@@ -12,14 +11,8 @@ Feature("Dropping", () => {
     after(pythia.forget);
 
     let board;
-    Given("a board", () => {
+    When("a board is created", () => {
       board = new Board();
-    });
-
-    When("shape is at the top of the bricks", () => {
-      const x = 0;
-      const y = Board.MAX_Y - 2;
-      board.current.moveTo(x, y);
     });
 
     Then("the bottom four rows should be filled", () => {
@@ -40,6 +33,12 @@ Feature("Dropping", () => {
     let controls;
     When("controls are initialized", () => {
       controls = new Controls(board);
+    });
+
+    And("shape is moved to top of the bricks", () => {
+      const x = 0;
+      const y = Board.MAX_Y - 2;
+      board.current.moveTo(x, y);
     });
 
     Then("square should be in the middle, in first rotation state", () => {
@@ -76,7 +75,6 @@ Feature("Dropping", () => {
     });
 
     Then("the tee should be gone", () => {
-      console.log(board.toString()); // eslint-disable-line no-console
       expect(board.toString()).to.equal([
         "00000000000000000011",
         "00000000000000000011",
@@ -91,7 +89,7 @@ Feature("Dropping", () => {
       ].join("\n"));
     });
 
-    When("moving the shape to the down", () => {
+    When("moving the shape down", () => {
       controls.down();
       controls.down();
     });
@@ -100,8 +98,7 @@ Feature("Dropping", () => {
       controls.drop();
     });
 
-    Then("the zed should be gone ", () => {
-      console.log(board.toString()); // eslint-disable-line no-console
+    Then("the zed should be gone", () => {
       expect(board.toString()).to.equal([
         "00000000000000000011",
         "00000000000000000011",
@@ -121,7 +118,6 @@ Feature("Dropping", () => {
     });
 
     Then("the square should be gone, and three penalty lines should be added", () => {
-      console.log(board.toString()); // eslint-disable-line no-console
       expect(board.toString()).to.equal([
         "00000000000000011111",
         "00000000000000011111",
@@ -134,29 +130,6 @@ Feature("Dropping", () => {
         "00000000000001111111",
         "00000000000001111111",
       ].join("\n"));
-    });
-  });
-
-  Scenario("available shapes", () => {
-    let board;
-    Given("a board", () => {
-      board = new Board();
-    });
-    let controls;
-
-    And("controls are initialized", () => {
-      controls = new Controls(board);
-    });
-
-    Object.values(Shape.SHAPES).forEach((_, i, shapes) => {
-      const length = shapes.length - i - 1 || shapes.length;
-      Then(`available shapes length is ${length}`, () => {
-        expect(board.shapes).to.have.lengthOf(length);
-      });
-
-      When("dropping shape", () => {
-        controls.drop();
-      });
     });
   });
 });
