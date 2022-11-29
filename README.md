@@ -21,7 +21,6 @@ Go to https://daghall.github.io/sirtet/
 ## TODO
 
 - Add all Tetris shapes (only three at the moment)
-- Remove cleared lines
 - Show next brick
 - Hold/swap current shape
 - Scoring

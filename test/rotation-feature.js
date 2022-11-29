@@ -1,36 +1,51 @@
-import pythia from "the-pythia";
-
 import Board from "../lib/board.js";
 import Controls from "../lib/controls.js";
+import Shape from "../lib/shape.js";
+
+const x = Math.floor(Board.MAX_X / 2);
+const y = Math.floor(Board.MAX_Y / 2);
 
 Feature("Rotation", () => {
-  before(() => {
-    pythia.predict(0);
-  });
-  after(pythia.forget);
+  let board;
+  let controls;
 
-  Scenario("rotate tee", () => {
-    let board;
-    Given("a board", () => {
-      board = new Board();
+  before(() => {
+    board = new Board();
+    controls = new Controls(board);
+  });
+
+  Scenario("square", () => {
+    Given("a square shape", () => {
+      board.setShape(new Shape(Shape.SHAPES.SQUARE));
     });
 
-    And("a tee block in the middle", () => {
-      const x = Math.floor(Board.MAX_X / 2);
-      const y = Math.floor(Board.MAX_Y / 2);
+    When("the shape is moved to the middle", () => {
       board.current.moveTo(x, y);
     });
 
-    let controls;
-    When("controls are initialized", () => {
-      controls = new Controls(board);
+    Then("square should me in the middle, in the first rotation state", () => {
+      expect(board.current.toString()).to.deep.equal("square 3:8,3:9,4:8,4:9");
     });
 
-    And("next shape is used", () => {
-      board.nextShape();
+    When("rotating clockwise", () => {
+      controls.rotateClockwise();
     });
 
-    Then("tee should be in the middle, in first rotation state", () => {
+    Then("square should me in the middle, in the first rotation state", () => {
+      expect(board.current.toString()).to.deep.equal("square 3:8,3:9,4:8,4:9");
+    });
+  });
+
+  Scenario("tee", () => {
+    Given("a tee shape", () => {
+      board.setShape(new Shape(Shape.SHAPES.TEE));
+    });
+
+    When("the shape is moved to the middle", () => {
+      board.current.moveTo(x, y);
+    });
+
+    Then("tee should be in the middle, in the first rotation state", () => {
       expect(board.current.rotationState).to.equal(0);
       expect(board.current.toString()).to.deep.equal("tee 3:9,4:8,4:9,5:9");
     });
@@ -39,7 +54,7 @@ Feature("Rotation", () => {
       controls.rotateClockwise();
     });
 
-    Then("tee should be in second rotation state", () => {
+    Then("tee should be in the second rotation state", () => {
       expect(board.current.rotationState).to.equal(1);
       expect(board.current.toString()).to.deep.equal("tee 4:8,4:9,4:10,5:9");
     });
@@ -48,7 +63,7 @@ Feature("Rotation", () => {
       controls.rotateClockwise();
     });
 
-    Then("tee should be in third rotation state", () => {
+    Then("tee should be in the third rotation state", () => {
       expect(board.current.rotationState).to.equal(2);
       expect(board.current.toString()).to.deep.equal("tee 3:9,4:9,4:10,5:9");
     });
@@ -57,7 +72,7 @@ Feature("Rotation", () => {
       controls.rotateClockwise();
     });
 
-    Then("tee should be in fourth rotation state", () => {
+    Then("tee should be in the fourth rotation state", () => {
       expect(board.current.rotationState).to.equal(3);
       expect(board.current.toString()).to.deep.equal("tee 3:9,4:8,4:9,4:10");
     });
@@ -66,7 +81,7 @@ Feature("Rotation", () => {
       controls.rotateClockwise();
     });
 
-    Then("tee should be in first rotation state", () => {
+    Then("tee should be in the first rotation state", () => {
       expect(board.current.rotationState).to.equal(0);
       expect(board.current.toString()).to.deep.equal("tee 3:9,4:8,4:9,5:9");
     });
@@ -75,7 +90,7 @@ Feature("Rotation", () => {
       controls.rotateCounterClockwise();
     });
 
-    Then("tee should be in fourth rotation state again", () => {
+    Then("tee should be in the fourth rotation state again", () => {
       expect(board.current.rotationState).to.equal(3);
       expect(board.current.toString()).to.deep.equal("tee 3:9,4:8,4:9,4:10");
     });
@@ -84,7 +99,7 @@ Feature("Rotation", () => {
       controls.rotateCounterClockwise();
     });
 
-    Then("tee should be in third rotation state again", () => {
+    Then("tee should be in the third rotation state again", () => {
       expect(board.current.rotationState).to.equal(2);
       expect(board.current.toString()).to.deep.equal("tee 3:9,4:9,4:10,5:9");
     });
@@ -93,7 +108,7 @@ Feature("Rotation", () => {
       controls.rotateCounterClockwise();
     });
 
-    Then("tee should be in second rotation state again", () => {
+    Then("tee should be in the second rotation state again", () => {
       expect(board.current.rotationState).to.equal(1);
       expect(board.current.toString()).to.deep.equal("tee 4:8,4:9,4:10,5:9");
     });
@@ -105,6 +120,108 @@ Feature("Rotation", () => {
     Then("tee should be in the first rotation state again", () => {
       expect(board.current.rotationState).to.equal(0);
       expect(board.current.toString()).to.deep.equal("tee 3:9,4:8,4:9,5:9");
+    });
+  });
+
+  Scenario("zed", () => {
+    Given("a zed shape", () => {
+      board.setShape(new Shape(Shape.SHAPES.ZED));
+    });
+
+    When("the shape is moved to the middle", () => {
+      board.current.moveTo(x, y);
+    });
+
+    Then("zed should be in the middle, in the first rotation state", () => {
+      expect(board.current.rotationState).to.equal(0);
+      expect(board.current.toString()).to.deep.equal("zed 3:8,4:8,4:9,5:9");
+    });
+
+    When("rotating clockwise", () => {
+      controls.rotateClockwise();
+    });
+
+    Then("zed should be in the second rotation state", () => {
+      expect(board.current.rotationState).to.equal(1);
+      expect(board.current.toString()).to.deep.equal("zed 3:9,3:10,4:8,4:9");
+    });
+
+    When("rotating clockwise a second time", () => {
+      controls.rotateClockwise();
+    });
+
+    Then("zed should in the first rotation state again", () => {
+      expect(board.current.rotationState).to.equal(0);
+      expect(board.current.toString()).to.deep.equal("zed 3:8,4:8,4:9,5:9");
+    });
+
+    When("rotating counter clockwise", () => {
+      controls.rotateCounterClockwise();
+    });
+
+    Then("zed should be in the second rotation state again", () => {
+      expect(board.current.rotationState).to.equal(1);
+      expect(board.current.toString()).to.deep.equal("zed 3:9,3:10,4:8,4:9");
+    });
+
+    When("rotating counter clockwise a second time", () => {
+      controls.rotateCounterClockwise();
+    });
+
+    Then("zed should be in the first rotation state again", () => {
+      expect(board.current.rotationState).to.equal(0);
+      expect(board.current.toString()).to.deep.equal("zed 3:8,4:8,4:9,5:9");
+    });
+  });
+
+  Scenario("line", () => {
+    Given("a line shape", () => {
+      board.setShape(new Shape(Shape.SHAPES.LINE));
+    });
+
+    When("the shape is moved to the middle", () => {
+      board.current.moveTo(x, y);
+    });
+
+    Then("line should be in the middle, in the first rotation state", () => {
+      expect(board.current.rotationState).to.equal(0);
+      expect(board.current.toString()).to.deep.equal("line 4:8,4:9,4:10,4:11");
+    });
+
+    When("rotating clockwise", () => {
+      controls.rotateClockwise();
+    });
+
+    Then("line should be in the second rotation state", () => {
+      expect(board.current.rotationState).to.equal(1);
+      expect(board.current.toString()).to.deep.equal("line 3:9,4:9,5:9,6:9");
+    });
+
+    When("rotating clockwise a second time", () => {
+      controls.rotateClockwise();
+    });
+
+    Then("line should in the first rotation state again", () => {
+      expect(board.current.rotationState).to.equal(0);
+      expect(board.current.toString()).to.deep.equal("line 4:8,4:9,4:10,4:11");
+    });
+
+    When("rotating counter clockwise", () => {
+      controls.rotateCounterClockwise();
+    });
+
+    Then("line should be in the second rotation state again", () => {
+      expect(board.current.rotationState).to.equal(1);
+      expect(board.current.toString()).to.deep.equal("line 3:9,4:9,5:9,6:9");
+    });
+
+    When("rotating counter clockwise a second time", () => {
+      controls.rotateCounterClockwise();
+    });
+
+    Then("line should be in the first rotation state again", () => {
+      expect(board.current.rotationState).to.equal(0);
+      expect(board.current.toString()).to.deep.equal("line 4:8,4:9,4:10,4:11");
     });
   });
 });

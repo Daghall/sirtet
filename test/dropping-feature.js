@@ -113,18 +113,22 @@ Feature("Dropping", () => {
       ].join("\n"));
     });
 
+    When("rotating the line", () => {
+      controls.rotateClockwise();
+    });
+
     When("dropping the shape", () => {
       controls.drop();
     });
 
-    Then("the square should be gone, and three penalty lines should be added", () => {
+    Then("the line should be gone, and three penalty lines should be added", () => {
       expect(board.toString()).to.equal([
         "00000000000000011111",
         "00000000000000011111",
-        "00000000000001000111",
+        "00000000000001001111",
         "00000000000000000111",
         "00000000000001010111",
-        "00000000000001111111",
+        "00000000000001011111",
         "00000000000001111111",
         "00000000000001111111",
         "00000000000001111111",
