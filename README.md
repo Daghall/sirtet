@@ -20,7 +20,6 @@ Go to https://daghall.github.io/sirtet/
 
 ## TODO
 
-- Add all Tetris shapes (only three at the moment)
 - Show next brick
 - Hold/swap current shape
 - Scoring
