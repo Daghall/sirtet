@@ -41,16 +41,16 @@ Feature("Dropping", () => {
       board.current.moveTo(x, y);
     });
 
-    Then("square should be in the middle, in first rotation state", () => {
+    Then("SQUARE should be in the middle, in first rotation state", () => {
       expect(board.current.rotationState).to.equal(0);
-      expect(board.current.toString()).to.deep.equal("square 0:16,0:17,1:16,1:17");
+      expect(board.current.toString()).to.deep.equal("SQUARE 0:16,0:17,1:16,1:17");
     });
 
     When("dropping the shape", () => {
       controls.drop();
     });
 
-    Then("the square should be gone", () => {
+    Then("the SQUARE should be gone", () => {
       expect(board.toString()).to.equal([
         "00000000000000000011",
         "00000000000000000011",
