@@ -224,4 +224,55 @@ Feature("Rotation", () => {
       expect(board.current.toString()).to.deep.equal("line 4:8,4:9,4:10,4:11");
     });
   });
+
+  Scenario("dez", () => {
+    Given("a dez shape", () => {
+      board.setShape(new Shape(Shape.SHAPES.DEZ));
+    });
+
+    When("the shape is moved to the middle", () => {
+      board.current.moveTo(x, y);
+    });
+
+    Then("dez should be in the middle, in the first rotation state", () => {
+      expect(board.current.rotationState).to.equal(0);
+      expect(board.current.toString()).to.deep.equal("dez 3:9,4:8,4:9,5:8");
+    });
+
+    When("rotating clockwise", () => {
+      controls.rotateClockwise();
+    });
+
+    Then("dez should be in the second rotation state", () => {
+      expect(board.current.rotationState).to.equal(1);
+      expect(board.current.toString()).to.deep.equal("dez 3:8,3:9,4:9,4:10");
+    });
+
+    When("rotating clockwise a second time", () => {
+      controls.rotateClockwise();
+    });
+
+    Then("dez should in the first rotation state again", () => {
+      expect(board.current.rotationState).to.equal(0);
+      expect(board.current.toString()).to.deep.equal("dez 3:9,4:8,4:9,5:8");
+    });
+
+    When("rotating counter clockwise", () => {
+      controls.rotateCounterClockwise();
+    });
+
+    Then("dez should be in the second rotation state again", () => {
+      expect(board.current.rotationState).to.equal(1);
+      expect(board.current.toString()).to.deep.equal("dez 3:8,3:9,4:9,4:10");
+    });
+
+    When("rotating counter clockwise a second time", () => {
+      controls.rotateCounterClockwise();
+    });
+
+    Then("dez should be in the first rotation state again", () => {
+      expect(board.current.rotationState).to.equal(0);
+      expect(board.current.toString()).to.deep.equal("dez 3:9,4:8,4:9,5:8");
+    });
+  });
 });
