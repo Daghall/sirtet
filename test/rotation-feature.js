@@ -275,4 +275,91 @@ Feature("Rotation", () => {
       expect(board.current.toString()).to.deep.equal("dez 3:9,4:8,4:9,5:8");
     });
   });
+
+  Scenario("ELL", () => {
+    Given("an ELL shape", () => {
+      board.setShape(new Shape(Shape.SHAPES.ELL));
+    });
+
+    When("the shape is moved to the middle", () => {
+      board.current.moveTo(x, y);
+    });
+
+    Then("ELL should be in the middle, in the first rotation state", () => {
+      expect(board.current.rotationState).to.equal(0);
+      expect(board.current.toString()).to.deep.equal("ell 4:8,4:9,4:10,5:8");
+    });
+
+    When("rotating clockwise", () => {
+      controls.rotateClockwise();
+    });
+
+    Then("ELL should be in the second rotation state", () => {
+      expect(board.current.rotationState).to.equal(1);
+      expect(board.current.toString()).to.deep.equal("ell 3:9,4:9,5:9,5:10");
+    });
+
+    When("rotating clockwise a second time", () => {
+      controls.rotateClockwise();
+    });
+
+    Then("ELL should be in the third rotation state", () => {
+      expect(board.current.rotationState).to.equal(2);
+      expect(board.current.toString()).to.deep.equal("ell 3:10,4:8,4:9,4:10");
+    });
+
+    When("rotating clockwise a third time", () => {
+      controls.rotateClockwise();
+    });
+
+    Then("ELL should be in the fourth rotation state", () => {
+      expect(board.current.rotationState).to.equal(3);
+      expect(board.current.toString()).to.deep.equal("ell 3:8,3:9,4:9,5:9");
+    });
+
+    When("rotating clockwise a fourth time", () => {
+      controls.rotateClockwise();
+    });
+
+    Then("ELL should be in the first rotation state", () => {
+      expect(board.current.rotationState).to.equal(0);
+      expect(board.current.toString()).to.deep.equal("ell 4:8,4:9,4:10,5:8");
+    });
+
+    When("rotating counter clockwise", () => {
+      controls.rotateCounterClockwise();
+    });
+
+    Then("ELL should be in the fourth rotation state again", () => {
+      expect(board.current.rotationState).to.equal(3);
+      expect(board.current.toString()).to.deep.equal("ell 3:8,3:9,4:9,5:9");
+    });
+
+    When("rotating counter clockwise a second time", () => {
+      controls.rotateCounterClockwise();
+    });
+
+    Then("ELL should be in the third rotation state again", () => {
+      expect(board.current.rotationState).to.equal(2);
+      expect(board.current.toString()).to.deep.equal("ell 3:10,4:8,4:9,4:10");
+    });
+
+    When("rotating counter clockwise a third time", () => {
+      controls.rotateCounterClockwise();
+    });
+
+    Then("ELL should be in the second rotation state again", () => {
+      expect(board.current.rotationState).to.equal(1);
+      expect(board.current.toString()).to.deep.equal("ell 3:9,4:9,5:9,5:10");
+    });
+
+    When("rotating counter clockwise a fourth time", () => {
+      controls.rotateCounterClockwise();
+    });
+
+    Then("ELL should be in the first rotation state again", () => {
+      expect(board.current.rotationState).to.equal(0);
+      expect(board.current.toString()).to.deep.equal("ell 4:8,4:9,4:10,5:8");
+    });
+  });
 });
