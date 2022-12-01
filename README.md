@@ -10,7 +10,7 @@ Go to https://daghall.github.io/sirtet/
 
 ### Rules
 
-- Drop (remove) gray bricks
+- Punch (remove) gray bricks
 - Green bricks are removed withouth penalty
 - Red bricks are punished with an extra line at the end, per red brick
 
@@ -35,11 +35,11 @@ Go to https://daghall.github.io/sirtet/
   - Full clears
   - Penalties
 - Death
-- Timer for auto-drop
+- Timer for auto-punch
   - Increase speed of timer when
 - Add new bricks from the bottom at regular intervals
   - Timer?
-  - Per X dropped shapes?
+  - Per X punch shapes?
     - Penalties speeds up addition
 - Rendering
   - Border

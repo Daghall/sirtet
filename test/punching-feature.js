@@ -4,7 +4,7 @@ import Board from "../lib/board.js";
 import Controls from "../lib/controls.js";
 
 Feature("Dropping", () => {
-  Scenario("dropping shapes", () => {
+  Scenario("punching shapes", () => {
     before(() => {
       pythia.predict(0);
     });
@@ -38,16 +38,16 @@ Feature("Dropping", () => {
     And("shape is moved to top of the bricks", () => {
       const x = 0;
       const y = Board.MAX_Y - 2;
-      board.current.moveTo(x, y);
+      board.die.moveTo(x, y);
     });
 
     Then("SQUARE should be in the middle, in first rotation state", () => {
-      expect(board.current.rotationState).to.equal(0);
-      expect(board.current.toString()).to.deep.equal("SQUARE 0:16,0:17,1:16,1:17");
+      expect(board.die.rotationState).to.equal(0);
+      expect(board.die.toString()).to.deep.equal("SQUARE 0:16,0:17,1:16,1:17");
     });
 
-    When("dropping the shape", () => {
-      controls.drop();
+    When("punching the shape", () => {
+      controls.punch();
     });
 
     Then("the SQUARE should be gone", () => {
@@ -70,8 +70,8 @@ Feature("Dropping", () => {
       controls.right();
     });
 
-    And("dropping the shape", () => {
-      controls.drop();
+    And("punching the shape", () => {
+      controls.punch();
     });
 
     Then("the tee should be gone", () => {
@@ -94,8 +94,8 @@ Feature("Dropping", () => {
       controls.down();
     });
 
-    And("dropping the shape", () => {
-      controls.drop();
+    And("punching the shape", () => {
+      controls.punch();
     });
 
     Then("the zed should be gone", () => {
@@ -117,8 +117,8 @@ Feature("Dropping", () => {
       controls.rotateClockwise();
     });
 
-    When("dropping the shape", () => {
-      controls.drop();
+    When("punching the shape", () => {
+      controls.punch();
     });
 
     Then("the line should be gone, and three penalty lines should be added", () => {

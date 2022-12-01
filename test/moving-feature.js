@@ -16,7 +16,7 @@ Feature("Moving", () => {
     });
 
     And("a SQUARE one block from the top", () => {
-      board.current.moveTo(2, 2);
+      board.die.moveTo(2, 2);
     });
 
     let controls;
@@ -25,7 +25,7 @@ Feature("Moving", () => {
     });
 
     Then("SQUARE should be near the top", () => {
-      expect(board.current.toString()).to.deep.equal("SQUARE 1:1,1:2,2:1,2:2");
+      expect(board.die.toString()).to.deep.equal("SQUARE 1:1,1:2,2:1,2:2");
     });
 
     When("moving SQUARE up", () => {
@@ -33,7 +33,7 @@ Feature("Moving", () => {
     });
 
     Then("SQUARE should be moved", () => {
-      expect(board.current.toString()).to.deep.equal("SQUARE 1:0,1:1,2:0,2:1");
+      expect(board.die.toString()).to.deep.equal("SQUARE 1:0,1:1,2:0,2:1");
     });
 
     When("trying to move beyond top", () => {
@@ -41,7 +41,7 @@ Feature("Moving", () => {
     });
 
     Then("SQUARE should be at the same place", () => {
-      expect(board.current.toString()).to.deep.equal("SQUARE 1:0,1:1,2:0,2:1");
+      expect(board.die.toString()).to.deep.equal("SQUARE 1:0,1:1,2:0,2:1");
     });
   });
 
@@ -52,7 +52,7 @@ Feature("Moving", () => {
     });
 
     And("a SQUARE one block from the bottom", () => {
-      board.current.moveTo(2, Board.MAX_Y - 1);
+      board.die.moveTo(2, Board.MAX_Y - 1);
     });
 
     let controls;
@@ -61,7 +61,7 @@ Feature("Moving", () => {
     });
 
     Then("SQUARE should be near the bottom", () => {
-      expect(board.current.toString()).to.deep.equal("SQUARE 1:17,1:18,2:17,2:18");
+      expect(board.die.toString()).to.deep.equal("SQUARE 1:17,1:18,2:17,2:18");
     });
 
     When("moving SQUARE down", () => {
@@ -69,7 +69,7 @@ Feature("Moving", () => {
     });
 
     Then("SQUARE should be moved", () => {
-      expect(board.current.toString()).to.deep.equal("SQUARE 1:18,1:19,2:18,2:19");
+      expect(board.die.toString()).to.deep.equal("SQUARE 1:18,1:19,2:18,2:19");
     });
 
     When("trying to move beyond bottom", () => {
@@ -77,7 +77,7 @@ Feature("Moving", () => {
     });
 
     Then("SQUARE should be at the same place", () => {
-      expect(board.current.toString()).to.deep.equal("SQUARE 1:18,1:19,2:18,2:19");
+      expect(board.die.toString()).to.deep.equal("SQUARE 1:18,1:19,2:18,2:19");
     });
   });
 
@@ -88,7 +88,7 @@ Feature("Moving", () => {
     });
 
     And("a SQUARE one block from the left wall", () => {
-      board.current.moveTo(2, 2);
+      board.die.moveTo(2, 2);
     });
 
     let controls;
@@ -97,7 +97,7 @@ Feature("Moving", () => {
     });
 
     Then("SQUARE should be near the top", () => {
-      expect(board.current.toString()).to.deep.equal("SQUARE 1:1,1:2,2:1,2:2");
+      expect(board.die.toString()).to.deep.equal("SQUARE 1:1,1:2,2:1,2:2");
     });
 
     When("moving SQUARE left", () => {
@@ -105,7 +105,7 @@ Feature("Moving", () => {
     });
 
     Then("SQUARE should be moved", () => {
-      expect(board.current.toString()).to.deep.equal("SQUARE 0:1,0:2,1:1,1:2");
+      expect(board.die.toString()).to.deep.equal("SQUARE 0:1,0:2,1:1,1:2");
     });
 
     When("trying to move beyond left wall", () => {
@@ -113,7 +113,7 @@ Feature("Moving", () => {
     });
 
     Then("SQUARE should be at the same place", () => {
-      expect(board.current.toString()).to.deep.equal("SQUARE 0:1,0:2,1:1,1:2");
+      expect(board.die.toString()).to.deep.equal("SQUARE 0:1,0:2,1:1,1:2");
     });
   });
 
@@ -124,7 +124,7 @@ Feature("Moving", () => {
     });
 
     And("a SQUARE one block from the right wall", () => {
-      board.current.moveTo(Board.MAX_X - 1, 2);
+      board.die.moveTo(Board.MAX_X - 1, 2);
     });
 
     let controls;
@@ -133,7 +133,7 @@ Feature("Moving", () => {
     });
 
     Then("SQUARE should be near the top", () => {
-      expect(board.current.toString()).to.deep.equal("SQUARE 7:1,7:2,8:1,8:2");
+      expect(board.die.toString()).to.deep.equal("SQUARE 7:1,7:2,8:1,8:2");
     });
 
     When("moving SQUARE right", () => {
@@ -141,7 +141,7 @@ Feature("Moving", () => {
     });
 
     Then("SQUARE should be moved", () => {
-      expect(board.current.toString()).to.deep.equal("SQUARE 8:1,8:2,9:1,9:2");
+      expect(board.die.toString()).to.deep.equal("SQUARE 8:1,8:2,9:1,9:2");
     });
 
     When("trying to move beyond right wall", () => {
@@ -149,7 +149,7 @@ Feature("Moving", () => {
     });
 
     Then("SQUARE should be at the same place", () => {
-      expect(board.current.toString()).to.deep.equal("SQUARE 8:1,8:2,9:1,9:2");
+      expect(board.die.toString()).to.deep.equal("SQUARE 8:1,8:2,9:1,9:2");
     });
   });
 });

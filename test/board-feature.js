@@ -10,7 +10,7 @@ Feature("Board", () => {
   });
   after(pythia.forget);
 
-  Scenario("removing empty lines at the top, after drop", () => {
+  Scenario("removing empty lines at the top, after punch", () => {
     let board;
     When("a board is created", () => {
       board = new Board();
@@ -46,11 +46,11 @@ Feature("Board", () => {
     And("shape is moved to top of the bricks", () => {
       const x = 5;
       const y = 3;
-      board.current.moveTo(x, y);
+      board.die.moveTo(x, y);
     });
 
     Then("square should be in the middle", () => {
-      expect(board.current.rotationState).to.equal(0);
+      expect(board.die.rotationState).to.equal(0);
       expect(board.toString({ showShape: true })).to.equal([
         "000011",
         "000011",
@@ -61,8 +61,8 @@ Feature("Board", () => {
       ].join("\n"));
     });
 
-    When("dropping the shape", () => {
-      controls.drop();
+    When("punching the shape", () => {
+      controls.punch();
     });
 
     Then("the square should be gone", () => {
@@ -77,7 +77,7 @@ Feature("Board", () => {
     });
   });
 
-  Scenario("removing empty lines in the middle, after drop", () => {
+  Scenario("removing empty lines in the middle, after punch", () => {
     let board;
     When("a board is created", () => {
       board = new Board();
@@ -113,11 +113,11 @@ Feature("Board", () => {
     And("shape is moved to top of the bricks", () => {
       const x = 0;
       const y = 3;
-      board.current.moveTo(x, y);
+      board.die.moveTo(x, y);
     });
 
     Then("square should be in the middle", () => {
-      expect(board.current.rotationState).to.equal(0);
+      expect(board.die.rotationState).to.equal(0);
       expect(board.toString({ showShape: true })).to.equal([
         "113311",
         "113311",
@@ -128,8 +128,8 @@ Feature("Board", () => {
       ].join("\n"));
     });
 
-    When("dropping the shape", () => {
-      controls.drop();
+    When("punching the shape", () => {
+      controls.punch();
     });
 
     Then("the square should be gone", () => {
@@ -144,7 +144,7 @@ Feature("Board", () => {
     });
   });
 
-  Scenario("removing empty lines at the bottom, after drop", () => {
+  Scenario("removing empty lines at the bottom, after punch", () => {
     let board;
     When("a board is created", () => {
       board = new Board();
@@ -176,11 +176,11 @@ Feature("Board", () => {
     And("shape is moved to top of the bricks", () => {
       const x = 2;
       const y = 3;
-      board.current.moveTo(x, y);
+      board.die.moveTo(x, y);
     });
 
     Then("square should be in the middle", () => {
-      expect(board.current.rotationState).to.equal(0);
+      expect(board.die.rotationState).to.equal(0);
       expect(board.toString({ showShape: true })).to.equal([
         "1100",
         "1133",
@@ -189,8 +189,8 @@ Feature("Board", () => {
       ].join("\n"));
     });
 
-    When("dropping the shape", () => {
-      controls.drop();
+    When("punching the shape", () => {
+      controls.punch();
     });
 
     Then("the square should be gone", () => {
@@ -203,7 +203,7 @@ Feature("Board", () => {
     });
   });
 
-  Scenario("removing empty lines at the bottom with a standing LINE, after drop", () => {
+  Scenario("removing empty lines at the bottom with a standing LINE, after punch", () => {
     let board;
     When("a board is created", () => {
       board = new Board();
@@ -239,11 +239,11 @@ Feature("Board", () => {
     And("shape is moved into position", () => {
       const x = 0;
       const y = 2;
-      board.current.moveTo(x, y);
+      board.die.moveTo(x, y);
     });
 
     Then("LINE should be at the bottom right", () => {
-      expect(board.current.rotationState).to.equal(0);
+      expect(board.die.rotationState).to.equal(0);
       expect(board.toString({ showShape: true })).to.equal([
         "133331",
         "100001",
@@ -252,8 +252,8 @@ Feature("Board", () => {
       ].join("\n"));
     });
 
-    When("dropping the shape", () => {
-      controls.drop();
+    When("punching the shape", () => {
+      controls.punch();
     });
 
     Then("the square should be gone", () => {
@@ -266,7 +266,7 @@ Feature("Board", () => {
     });
   });
 
-  Scenario("removing empty lines at the bottom with a lying LINE, after drop", () => {
+  Scenario("removing empty lines at the bottom with a lying LINE, after punch", () => {
     let board;
     When("a board is created", () => {
       board = new Board();
@@ -307,11 +307,11 @@ Feature("Board", () => {
       const x = 2;
       const y = 1;
       controls.rotateClockwise();
-      board.current.moveTo(x, y);
+      board.die.moveTo(x, y);
     });
 
     Then("LINE should be at the bottom right", () => {
-      expect(board.current.rotationState).to.equal(1);
+      expect(board.die.rotationState).to.equal(1);
       expect(board.toString({ showShape: true })).to.equal([
         "101",
         "131",
@@ -322,8 +322,8 @@ Feature("Board", () => {
       ].join("\n"));
     });
 
-    When("dropping the shape", () => {
-      controls.drop();
+    When("punching the shape", () => {
+      controls.punch();
     });
 
     Then("the square should be gone", () => {
