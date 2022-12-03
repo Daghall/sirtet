@@ -3,8 +3,9 @@ import pythia from "the-pythia";
 import Board from "../lib/board.js";
 import Controls from "../lib/controls.js";
 
-Feature("Dropping", () => {
+Feature("Punching", () => {
   Scenario("punching shapes", () => {
+    const events = [];
     before(() => {
       pythia.predict(0);
     });
@@ -13,6 +14,12 @@ Feature("Dropping", () => {
     let board;
     When("a board is created", () => {
       board = new Board();
+    });
+
+    And("punch events are listened for", () => {
+      board.on("punch", (event) => {
+        events.push(event);
+      });
     });
 
     Then("the bottom four rows should be filled", () => {
@@ -65,6 +72,15 @@ Feature("Dropping", () => {
       ].join("\n"));
     });
 
+    And("there should have been four events emitted, in total", () => {
+      expect(events).to.have.deep.equal([
+        { x: 1, y: 17 },
+        { x: 0, y: 16 },
+        { x: 0, y: 17 },
+        { x: 1, y: 16 },
+      ]);
+    });
+
     When("moving the shape to the right", () => {
       controls.right();
       controls.right();
@@ -87,6 +103,10 @@ Feature("Dropping", () => {
         "00000000000000001111",
         "00000000000000001111",
       ].join("\n"));
+    });
+
+    And("there should have been eight events emitted, in total", () => {
+      expect(events).to.have.lengthOf(8);
     });
 
     When("moving the shape down", () => {
@@ -113,6 +133,10 @@ Feature("Dropping", () => {
       ].join("\n"));
     });
 
+    And("there should have been 12 events emitted, in total", () => {
+      expect(events).to.have.lengthOf(12);
+    });
+
     When("rotating the line", () => {
       controls.rotateClockwise();
     });
@@ -134,6 +158,10 @@ Feature("Dropping", () => {
         "00000000000001111111",
         "00000000000001111111",
       ].join("\n"));
+    });
+
+    And("there should have been 13 events emitted, in total", () => {
+      expect(events).to.have.lengthOf(13);
     });
   });
 });
