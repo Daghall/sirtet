@@ -44,7 +44,7 @@ Feature("Punching", () => {
 
     And("shape is moved to top of the bricks", () => {
       const x = 0;
-      const y = Board.MAX_Y - 2;
+      const y = board.maxY - 2;
       board.die.moveTo(x, y);
     });
 

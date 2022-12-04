@@ -12,16 +12,13 @@ Feature("Swapping", () => {
   after(pythia.forget);
 
   Scenario("holding/swapping shape", () => {
-    const x = Math.floor(Board.MAX_X / 2);
-    const y = Math.floor(Board.MAX_Y / 2);
-
     let board;
     Given("a board", () => {
       board = new Board();
     });
 
     And("the die is in the middle", () => {
-      board.die.moveTo(x, y);
+      board.die.moveTo(4, 9);
     });
 
     let controls;

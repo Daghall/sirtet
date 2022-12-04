@@ -2,9 +2,6 @@ import Board from "../lib/board.js";
 import Controls from "../lib/controls.js";
 import Shape from "../lib/shape.js";
 
-const x = Math.floor(Board.MAX_X / 2);
-const y = Math.floor(Board.MAX_Y / 2);
-
 Feature("Rotation", () => {
   let board;
   let controls;
@@ -20,7 +17,7 @@ Feature("Rotation", () => {
     });
 
     When("the shape is moved to the middle", () => {
-      board.die.moveTo(x, y);
+      board.die.moveTo(4, 9);
     });
 
     Then("SQUARE should me in the middle, in the first rotation state", () => {
@@ -42,7 +39,7 @@ Feature("Rotation", () => {
     });
 
     When("the shape is moved to the middle", () => {
-      board.die.moveTo(x, y);
+      board.die.moveTo(4, 9);
     });
 
     Then("TEE should be in the middle, in the first rotation state", () => {
@@ -129,7 +126,7 @@ Feature("Rotation", () => {
     });
 
     When("the shape is moved to the middle", () => {
-      board.die.moveTo(x, y);
+      board.die.moveTo(4, 9);
     });
 
     Then("ZED should be in the middle, in the first rotation state", () => {
@@ -180,7 +177,7 @@ Feature("Rotation", () => {
     });
 
     When("the shape is moved to the middle", () => {
-      board.die.moveTo(x, y);
+      board.die.moveTo(4, 9);
     });
 
     Then("LINE should be in the middle, in the first rotation state", () => {
@@ -231,7 +228,7 @@ Feature("Rotation", () => {
     });
 
     When("the shape is moved to the middle", () => {
-      board.die.moveTo(x, y);
+      board.die.moveTo(4, 9);
     });
 
     Then("DEZ should be in the middle, in the first rotation state", () => {
@@ -282,7 +279,7 @@ Feature("Rotation", () => {
     });
 
     When("the shape is moved to the middle", () => {
-      board.die.moveTo(x, y);
+      board.die.moveTo(4, 9);
     });
 
     Then("ELL should be in the middle, in the first rotation state", () => {
@@ -369,7 +366,7 @@ Feature("Rotation", () => {
     });
 
     When("the shape is moved to the middle", () => {
-      board.die.moveTo(x, y);
+      board.die.moveTo(4, 9);
     });
 
     Then("LLE should be in the middle, in the first rotation state", () => {

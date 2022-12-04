@@ -52,7 +52,7 @@ Feature("Moving", () => {
     });
 
     And("a SQUARE one block from the bottom", () => {
-      board.die.moveTo(2, Board.MAX_Y - 1);
+      board.die.moveTo(2, board.maxY - 1);
     });
 
     let controls;
@@ -124,7 +124,7 @@ Feature("Moving", () => {
     });
 
     And("a SQUARE one block from the right wall", () => {
-      board.die.moveTo(Board.MAX_X - 1, 2);
+      board.die.moveTo(board.maxX - 1, 2);
     });
 
     let controls;

@@ -337,4 +337,23 @@ Feature("Board", () => {
       ].join("\n"));
     });
   });
+
+  Scenario("constructor parameters", () => {
+    let board;
+    When("a board is created with parameters", () => {
+      board = new Board(5, 7, 9);
+    });
+
+    Then("the resulting board should reflect the parameters", () => {
+      expect(board.toString()).to.equal([
+        "000011111",
+        "000011111",
+        "000011111",
+        "000011111",
+        "000011111",
+        "000011111",
+        "000011111",
+      ].join("\n"));
+    });
+  });
 });
