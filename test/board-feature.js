@@ -1,3 +1,4 @@
+import { expect } from "chai";
 import pythia from "the-pythia";
 
 import Board from "../lib/board.js";
@@ -353,6 +354,78 @@ Feature("Board", () => {
         "000011111",
         "000011111",
         "000011111",
+      ].join("\n"));
+    });
+  });
+
+  Scenario("full clear", () => {
+    const events = [];
+
+    let board;
+    Given("a board", () => {
+      board = new Board(4, 4, 6);
+    });
+
+    And("punch events are listened for", () => {
+      board.on("full clear", (event) => {
+        events.push(event);
+      });
+    });
+
+    When("the board is almost cleared", () => {
+      board.setBoard([
+        [ 0, 0, 0, 0, 0, 0 ],
+        [ 0, 0, 0, 0, 1, 1 ],
+        [ 0, 0, 0, 0, 1, 1 ],
+        [ 0, 0, 0, 0, 0, 0 ],
+      ]);
+    });
+
+    Then("there should be an almost empty board", () => {
+      expect(board.toString()).to.equal([
+        "000000",
+        "000011",
+        "000011",
+        "000000",
+      ].join("\n"));
+    });
+
+    let controls;
+    When("controls are initialized", () => {
+      controls = new Controls(board);
+    });
+
+    And("shape is moved the non-cleared bricks", () => {
+      const x = 2;
+      const y = 5;
+      board.die.moveTo(x, y);
+    });
+
+    Then("square should be in the bottom middle", () => {
+      expect(board.die.rotationState).to.equal(0);
+      expect(board.toString({ showShape: true })).to.equal([
+        "000000",
+        "000033",
+        "000033",
+        "000000",
+      ].join("\n"));
+    });
+
+    When("punching the shape", () => {
+      controls.punch();
+    });
+
+    Then("there should have been a \"full clear\" event emitted", () => {
+      console.log({ events }); // eslint-disable-line no-console
+      expect(events).to.have.lengthOf(1);
+    });
+
+    And("the lower four rows should be filled", () => {
+      expect(board.toString()).to.equal([
+        "001111",
+        "001111",
+        "001111",
+        "001111",
       ].join("\n"));
     });
   });

@@ -8,44 +8,66 @@ Sirtet is Tetris backwards.
 Go to https://daghall.github.io/sirtet/
 
 
-### Rules
+## Rules
 
 - Punch (remove) gray bricks
-- Green bricks are removed withouth penalty
+- Green bricks are removed without penalty
 - Red bricks are punished with an extra line at the end, per red brick
+- After a swap, a new swap cannot be performed until the current shape has been punched
+
+### Scoring
+
+Completely cleared _rows_ score points, 100 points per line, plus a bonus:
+
+| Rows | Points | Bonus |
+| ---- | ------ | ----- |
+|    1 |    100 |       |
+|    2 |    250 |    50 |
+|    3 |    400 |   100 |
+|    4 |    550 |   150 |
+
+If the board is cleared (all gray blocks are removed), without any penalty rows, _1000_ points is instantly scored, and four new rows are inserted.
 
 
-### Controls
+## Controls
 
-- Move with arrow-keys or `h`, `j`, `k`, `l`
-- Rotate shape with `a` and `f`, for counter clockwise and clockwise, respectively
-- Remove the current shape with `d`
+All action keys are located on the home row: `A` `S` `D` `F` –  `H` `J` `K` `L`  
+
+| Key | Alt. |  Action   |
+| --- | ---- |  -------- |
+|  A  |      |  Rotate ⟲ |
+|  S  |      |  Swap     |
+|  D  |      |  Punch    |
+|  F  |      |  Rotate ⟳ |
+|  H  | ⬅    |  Left     |
+|  J  | ⬇    |  Down     |
+|  K  | ⬆    |  Up       |
+|  L  | ➡    |  Right    |
 
 
-## TODO / Roadmap
+# TODO / Roadmap
 
-- Hold/swap current shape
+- Dynamic size of `<canvas>`
 - Scoring
-  - Per green brick
   - Clearing the board (adds four new lines at the bottom)
   - More score for more time left on current shape?
-  - Log scores?
 - Stats
-  - Cleared lines/blocks
-  - Full clears
   - Penalties
+  - Level
+  - Time?
 - Death
+  - Result screen
 - Timer for auto-punch
-  - Increase speed of timer when
+  - Increase speed of timer when punching red brick?
 - Add new bricks from the bottom at regular intervals
   - Timer?
   - Per X punch shapes?
-    - Penalties speeds up addition
+    - Penalties speeds up addition?
+    - Random singles if total miss?
+- Alternate game mode: filled to the top, only valid punches are accepted?
 - Rendering
-  - Border
-  - Next shape
-  - Hold shape
-  - Event log
+  - Board border
+  - Event log?
   - Menu
     - New game
     - Quit/restart
@@ -53,8 +75,7 @@ Go to https://daghall.github.io/sirtet/
     - Control schemes
       - WASD
       - HJKL
-    - Accessability
+    - Accessibility
   - Pause
-- Sound?
-  - Music?
+- Music?
 - Mouse support?
