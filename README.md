@@ -26,7 +26,7 @@ Completely cleared _rows_ score points, 100 points per line, plus a bonus:
 |    3 |    400 |   100 |
 |    4 |    550 |   150 |
 
-If the board is cleared (all gray blocks are removed), without any penalty rows, _1000_ points is instantly scored, and four new rows are inserted.
+If the board is cleared (all gray blocks are removed twithout any penalty rows, _1000_ points is instantly scored, and four new rows are inserted.
 
 
 ## Controls
@@ -55,8 +55,9 @@ All action keys are located on the home row: `A` `S` `D` `F` –  `H` `J` `K` `L
   - Penalties
   - Level
   - Time?
-- Death
+- Death improvements:
   - Result screen
+  - High score
 - Timer for auto-punch
   - Increase speed of timer when punching red brick?
 - Add new bricks from the bottom at regular intervals

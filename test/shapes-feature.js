@@ -5,8 +5,8 @@ import Shape from "../lib/shape.js";
 Feature("Shapes", () => {
   Scenario("available shapes", () => {
     let board;
-    Given("a board", () => {
-      board = new Board();
+    When("a board is created", () => {
+      board = new Board(0, 8, 40);
     });
 
     let controls;
