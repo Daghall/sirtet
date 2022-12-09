@@ -1,6 +1,8 @@
 import { expect } from "chai";
+import pythia from "the-pythia";
 
 import Board from "../lib/board.js";
+import Controls from "../lib/controls.js";
 import ScoreKeeper from "../lib/score-keeper.js";
 
 Feature("Score keeper", () => {
@@ -28,6 +30,58 @@ Feature("Score keeper", () => {
       Then(`the player should be awarded ${score} points`, () => {
         expect(scoreKeeper.getBuffered()).to.equal(score);
       });
+    });
+  });
+
+  Scenario("only lines where blocks were actually removed should score points", () => {
+    before(() => {
+      pythia.predict(0);
+    });
+    after(pythia.forget);
+
+    let board;
+    Given("a board", () => {
+      board = new Board();
+    });
+
+    And("a gap in the board", () => {
+      board.setBoard([
+        [ 0, 1, 1, 1 ],
+        [ 0, 1, 1, 1 ],
+        [ 0, 0, 1, 1 ],
+        [ 0, 0, 1, 1 ],
+      ]);
+    });
+
+    let scoreKeeper;
+    And("a score keeper", () => {
+      scoreKeeper = new ScoreKeeper(board);
+    });
+
+    When("the SQUARE is moved to the top", () => {
+      board.die.moveTo(0, 1);
+    });
+
+    Then("the SQUARE is in position", () => {
+      expect(board.toString({ showShape: true })).to.equal([
+        "2311",
+        "2311",
+        "0011",
+        "0011",
+      ].join("\n"));
+    });
+
+    let controls;
+    When("controls are initialized", () => {
+      controls = new Controls(board);
+    });
+
+    And("punching", () => {
+      controls.punch();
+    });
+
+    Then("a single line of score is awarded", () => {
+      expect(scoreKeeper.getBuffered()).to.equal(100);
     });
   });
 
