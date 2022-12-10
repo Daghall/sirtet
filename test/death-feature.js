@@ -1,8 +1,10 @@
 import { expect } from "chai";
 import pythia from "the-pythia";
+import ck from "chronokinesis";
 
 import Board from "../lib/board.js";
 import Controls from "../lib/controls.js";
+import ScoreKeeper from "../lib/score-keeper.js";
 import Shape from "../lib/shape.js";
 
 Feature("Death", () => {
@@ -125,8 +127,12 @@ Feature("Death", () => {
   Scenario("game over screen", () => {
     before(() => {
       pythia.predict([ 0, 0.25, 0.5, 0.9999 ]);
+      ck.freeze("2022-12-09 12:00:00");
     });
-    after(pythia.forget);
+    after(() => {
+      pythia.forget();
+      ck.reset();
+    });
 
     let board;
     Given("a board", () => {
@@ -140,7 +146,20 @@ Feature("Death", () => {
       });
     });
 
-    When("the player dies", () => {
+    let scoreKeeper;
+    And("a score keeper", () => {
+      scoreKeeper = new ScoreKeeper(board);
+    });
+
+    When("player scores", () => {
+      board.emit("line cleared", 1);
+    });
+
+    And("the score is updated", () => {
+      scoreKeeper.update(600);
+    });
+
+    And("the player dies", () => {
       board.isPlaying = false;
       board.emit("death");
     });
@@ -149,7 +168,7 @@ Feature("Death", () => {
       board.update(600);
     });
 
-    Then("bricks are made solid", () => {
+    Then("bricks are exploded", () => {
       expect(board.toString()).to.equal([
         "2211",
         "2111",
@@ -162,7 +181,7 @@ Feature("Death", () => {
       board.update(600);
     });
 
-    Then("more bricks are made solid", () => {
+    Then("more bricks are exploded", () => {
       expect(board.toString()).to.equal([
         "2221",
         "2221",
@@ -175,7 +194,7 @@ Feature("Death", () => {
       board.update(600);
     });
 
-    Then("all bricks are made solid", () => {
+    Then("all bricks are exploded", () => {
       expect(board.toString()).to.equal([
         "2222",
         "2222",
@@ -190,6 +209,14 @@ Feature("Death", () => {
 
     Then("the \"game over\" event should have been emitted", () => {
       expect(gameOver, "Game over").to.equal(true);
+    });
+
+    And("the score should be added to the high score list", () => {
+      expect(scoreKeeper.getHighScores()).to.deep.equal([ {
+        date: Date.now(),
+        score: 100,
+        place: 1,
+      } ]);
     });
   });
 });

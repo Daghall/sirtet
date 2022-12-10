@@ -416,7 +416,6 @@ Feature("Board", () => {
     });
 
     Then("there should have been a \"full clear\" event emitted", () => {
-      console.log({ events }); // eslint-disable-line no-console
       expect(events).to.have.lengthOf(1);
     });
 
