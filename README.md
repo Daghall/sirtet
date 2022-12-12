@@ -57,7 +57,6 @@ All action keys are located on the home row: `A` `S` `D` `F` –  `H` `J` `K` `L
   - Time?
 - Death improvements:
   - Result screen
-  - High score
 - Timer for auto-punch
   - Increase speed of timer when punching red brick?
 - Add new bricks from the bottom at regular intervals
