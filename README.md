@@ -66,7 +66,6 @@ All action keys are located on the home row: `A` `S` `D` `F` –  `H` `J` `K` `L
     - Random singles if total miss?
 - Alternate game mode: filled to the top, only valid punches are accepted?
 - Rendering
-  - Board border
   - Event log?
   - Menu
     - New game
