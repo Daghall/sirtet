@@ -90,7 +90,7 @@ Feature("Punching", () => {
       controls.punch();
     });
 
-    Then("the tee should be gone", () => {
+    Then("the TEE should be gone", () => {
       expect(board.toString()).to.equal([
         "00000000000000000011",
         "00000000000000000011",
@@ -118,7 +118,7 @@ Feature("Punching", () => {
       controls.punch();
     });
 
-    Then("the zed should be gone", () => {
+    Then("the ZED should be gone", () => {
       expect(board.toString()).to.equal([
         "00000000000000000011",
         "00000000000000000011",
@@ -165,8 +165,7 @@ Feature("Punching", () => {
     });
   });
 
-  Scenario("full clear", () => {
-    const events = [];
+  Scenario("successful full clear", () => {
     before(() => {
       pythia.predict(0);
     });
@@ -177,25 +176,15 @@ Feature("Punching", () => {
       board = new Board();
     });
 
-    And("punch events are listened for", () => {
-      board.on("punch", (event) => {
-        events.push(event);
-      });
-    });
-
     And("the board is almost cleared", () => {
-      expect(board.toString()).to.equal([
-        "00000000000000001111",
-        "00000000000000001111",
-        "00000000000000001111",
-        "00000000000000001111",
-        "00000000000000001111",
-        "00000000000000001111",
-        "00000000000000001111",
-        "00000000000000001111",
-        "00000000000000001111",
-        "00000000000000001111",
-      ].join("\n"));
+      board.setBoard([
+        [ 0, 0, 0, 1, 1 ],
+        [ 0, 0, 0, 1, 1 ],
+        [ 0, 0, 0, 0, 0 ],
+        [ 0, 0, 0, 0, 0 ],
+        [ 0, 0, 0, 0, 0 ],
+        [ 0, 0, 0, 0, 0 ],
+      ]);
     });
 
     let controls;
@@ -203,43 +192,70 @@ Feature("Punching", () => {
       controls = new Controls(board);
     });
 
-    And("shape is moved to top of the bricks", () => {
-      const x = 0;
-      const y = board.maxY - 2;
-      board.die.moveTo(x, y);
-    });
-
-    Then("SQUARE should be in the middle, in first rotation state", () => {
-      expect(board.die.rotationState).to.equal(0);
-      expect(board.die.toString()).to.deep.equal("SQUARE 0:16,0:17,1:16,1:17");
+    And("shape is moved into position", () => {
+      board.die.moveTo(0, 4);
     });
 
     When("punching the shape", () => {
       controls.punch();
     });
 
-    Then("the SQUARE should be gone", () => {
+    Then("the board should be filled to the starting state", () => {
       expect(board.toString()).to.equal([
-        "00000000000000000011",
-        "00000000000000000011",
-        "00000000000000001111",
-        "00000000000000001111",
-        "00000000000000001111",
-        "00000000000000001111",
-        "00000000000000001111",
-        "00000000000000001111",
-        "00000000000000001111",
-        "00000000000000001111",
+        "01111",
+        "01111",
+        "01111",
+        "01111",
+        "01111",
+        "01111",
       ].join("\n"));
     });
+  });
 
-    And("there should have been four events emitted, in total", () => {
-      expect(events).to.have.deep.equal([
-        { x: 1, y: 17 },
-        { x: 0, y: 16 },
-        { x: 0, y: 17 },
-        { x: 1, y: 16 },
+  Scenario("full clear with penalty", () => {
+    before(() => {
+      pythia.predict(0);
+    });
+    after(pythia.forget);
+
+    let board;
+    Given("a board", () => {
+      board = new Board();
+    });
+
+    And("the board is almost cleared", () => {
+      board.setBoard([
+        [ 0, 0, 0, 1, 1 ],
+        [ 0, 0, 0, 0, 1 ],
+        [ 0, 0, 0, 0, 0 ],
+        [ 0, 0, 0, 0, 0 ],
+        [ 0, 0, 0, 0, 0 ],
+        [ 0, 0, 0, 0, 0 ],
       ]);
+    });
+
+    let controls;
+    When("controls are initialized", () => {
+      controls = new Controls(board);
+    });
+
+    And("shape is moved into position", () => {
+      board.die.moveTo(0, 4);
+    });
+
+    When("punching the shape", () => {
+      controls.punch();
+    });
+
+    Then("the board should be filled to the starting state", () => {
+      expect(board.toString()).to.equal([
+        "00001",
+        "00001",
+        "00001",
+        "00001",
+        "00001",
+        "00001",
+      ].join("\n"));
     });
   });
 });
