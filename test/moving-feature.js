@@ -1,3 +1,4 @@
+import { expect } from "chai";
 import pythia from "the-pythia";
 
 import Board from "../lib/board.js";

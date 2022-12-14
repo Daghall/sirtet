@@ -1,3 +1,5 @@
+import { expect } from "chai";
+
 import Board from "../lib/board.js";
 import Controls from "../lib/controls.js";
 import Shape from "../lib/shape.js";

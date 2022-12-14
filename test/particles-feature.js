@@ -1,3 +1,4 @@
+import { expect } from "chai";
 import pythia from "the-pythia";
 
 import Particle from "../lib/particle.js";
