@@ -50,6 +50,7 @@ All action keys are located on the home row: `A` `S` `D` `F` –  `H` `J` `K` `L
 |  J  | ⬇    |  Down     |
 |  K  | ⬆    |  Up       |
 |  L  | ➡    |  Right    |
+| ESC |      |  Pause    |
 
 
 # TODO / Roadmap / Ideas
@@ -77,7 +78,6 @@ All action keys are located on the home row: `A` `S` `D` `F` –  `H` `J` `K` `L
       - WASD
       - HJKL
     - Accessibility
-  - Pause
 - Music?
 - Heartbeat sound effect as the bricks get cloaser to the top
 - Mouse support?
