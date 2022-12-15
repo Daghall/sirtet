@@ -35,7 +35,7 @@ Feature("High score", () => {
     });
 
     And("the player dies", () => {
-      board.isPlaying = false;
+      board.setState(Board.STATES.DEAD);
       board.emit("death");
     });
 
@@ -77,7 +77,7 @@ Feature("High score", () => {
     });
 
     And("the player dies", () => {
-      board.isPlaying = false;
+      board.setState(Board.STATES.DEAD);
       board.emit("death");
     });
 
@@ -147,7 +147,7 @@ Feature("High score", () => {
     });
 
     And("the player dies", () => {
-      board.isPlaying = false;
+      board.setState(Board.STATES.DEAD);
       board.emit("death");
     });
 
@@ -245,7 +245,7 @@ Feature("High score", () => {
     });
 
     And("the player dies", () => {
-      board.isPlaying = false;
+      board.setState(Board.STATES.DEAD);
       board.emit("death");
     });
 

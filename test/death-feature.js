@@ -40,7 +40,7 @@ Feature("Death", () => {
     });
 
     Then("the board should be playing", () => {
-      expect(board.isPlaying, "is playing").to.equal(true);
+      expect(board.isPlaying(), "is playing").to.equal(true);
     });
 
     let controls;
@@ -57,7 +57,7 @@ Feature("Death", () => {
     });
 
     And("the board should be in the paused state", () => {
-      expect(board.isPlaying, "is playing").to.equal(false);
+      expect(board.isPlaying(), "is playing").to.equal(false);
     });
 
     And("the current die should be the TEE", () => {
@@ -160,7 +160,7 @@ Feature("Death", () => {
     });
 
     And("the player dies", () => {
-      board.isPlaying = false;
+      board.setState(Board.STATES.DEAD);
       board.emit("death");
     });
 
