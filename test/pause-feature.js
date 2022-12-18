@@ -30,7 +30,7 @@ Feature("pause", () => {
     });
 
     And("some time passes", () => {
-      board.updateTimer(500);
+      board.update(500);
     });
 
     Then("board state should be PLAYING", () => {
@@ -54,7 +54,7 @@ Feature("pause", () => {
     });
 
     When("more time passes", () => {
-      board.updateTimer(500);
+      board.update(500);
     });
 
     Then("timer progress should NOT have advanced", () => {
@@ -124,7 +124,7 @@ Feature("pause", () => {
     });
 
     When("time passes", () => {
-      board.updateTimer(500);
+      board.update(500);
     });
 
     Then("timer progress should NOT have advanced", () => {

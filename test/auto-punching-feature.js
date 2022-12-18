@@ -54,7 +54,7 @@ Feature("Auto punching", () => {
     });
 
     When("the timer ticks down", () => {
-      board.updateTimer(500);
+      board.update(500);
     });
 
     Then("timer progress should be updated", () => {
@@ -70,7 +70,7 @@ Feature("Auto punching", () => {
     });
 
     When("the level's time limit is exceeded", () => {
-      board.updateTimer(5001);
+      board.update(5001);
     });
 
     Then("a punch should have been done", () => {
@@ -83,7 +83,7 @@ Feature("Auto punching", () => {
     });
 
     And("the level's time limit is exceeded", () => {
-      board.updateTimer(5001);
+      board.update(5001);
     });
 
     Then("a punch should have been done", () => {

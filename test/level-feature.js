@@ -69,7 +69,7 @@ Feature("Level", () => {
     });
 
     And("the level's time limit is exceeded", () => {
-      board.updateTimer(4801);
+      board.update(4801);
     });
 
     Then("an auto-punch should have happened", () => {
